@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baozou Canteen | Order Terminal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="canteen-mode">
+    <!-- CRT Overlay Elements -->
+    <!-- Audio Control Toggle -->
+    <div id="audio-control" title="TOGGLE_SYSTEM_AUDIO">
+        <span class="audio-icon">UNMUTE_SYSTEM</span>
+    </div>
+
+    <div class="crt-overlay"></div>
+    <div class="vignette"></div>
+    <div class="noise-overlay"></div>
+    <div class="grain-overlay"></div>
+    <div class="scanline"></div>
+    <div class="screen-flicker"></div>
+    
+    <!-- News Ticker -->
+    <div class="news-ticker">
+        <div class="ticker-content">
+            Food Council Reminder: Nutrient paste supply is sufficient today. Approaching Taste Exclusion Zone coordinates 104, 22 is strictly forbidden —— [WARNING] Illegal cookware detected in circulation, surrender immediately —— Preparations for the 100th Anniversary of Food Awakening are underway, Ingredient Civil Rights are inviolable
+        </div>
+    </div>
+
+    <!-- Digital Graffiti -->
+    <div class="graffiti g1">WHO ATE THE LAST RADISH?</div>
+    <div class="graffiti g2">THE MENU IS WATCHING YOU</div>
+    
+    <!-- Background Code Stream -->
+    <div class="bg-code-stream"></div>
+    
+    <!-- Survivor Signal Background (Flickering Messages) -->
+    <div id="signal-residuals-bg"></div>
+    
+    <!-- Stains and Dust -->
+    <div class="stain corner-tl"></div>
+    <div class="stain corner-br"></div>
+    <div class="dust-layer"></div>
+
+    <!-- Custom Cursor -->
+    <div id="custom-cursor">
+        <div class="cursor-crosshair"></div>
+        <div class="cursor-loading">
+            <span class="loading-percent">0</span>%
+        </div>
+    </div>
+
+    <!-- Mobile Hidden Entry (Subtle but reachable) -->
+    <div id="mobile-entry-trigger" title="DECRYPT_ARCHIVE">
+        <span class="trigger-icon"></span>
+        <span class="trigger-text">RADISH_KEY</span>
+    </div>
+
+    <div id="app">
+        <!-- Baozou Canteen Main UI -->
+        <main id="canteen-ui">
+            <!-- Monitoring Window -->
+            <div id="monitor-window">
+                <div class="monitor-header">
+                    <span class="monitor-title">REAL_TIME_MONITOR</span>
+                    <span class="monitor-dot"></span>
+                </div>
+                <div class="monitor-screen">
+                    <div class="monitor-radar">
+                        <div class="radar-line"></div>
+                        <div class="radar-point" style="top: 30%; left: 40%;"></div>
+                    </div>
+                    <div class="monitor-data">
+                        UNIT: RADISH_VOLUNTEER<br>
+                        STATUS: SYNCING...<br>
+                        LOC: WASTELAND_DENSE_FOREST
+                    </div>
+                </div>
+            </div>
+
+            <!-- Taste Interference Dashboard -->
+            <div id="dashboard-widget">
+                <div class="dashboard-label">TASTE_INTERFERENCE</div>
+                <div class="gauge-container">
+                    <div class="gauge-scale"></div>
+                    <div id="gauge-needle"></div>
+                    <div class="gauge-value">97.4%</div>
+                </div>
+                <!-- Unit 709: Encrypted Radish Image -->
+                <div id="unit-709-container">
+                    <div class="secret-data-hint">SECRET_DATA</div>
+                    <div class="unit-label">ENCRYPTED_UNIT_709</div>
+                    <img src="radish_unit_709.jpg" id="unit-709-img" alt="[ENCRYPTED DATA]">
+                    <div class="corrupted-overlay"></div>
+                </div>
+                
+                <!-- Survivor Qualification Test Button -->
+                <button id="pollution-detect-btn">
+                    <span class="btn-scan"></span>
+                    POLLUTION_DETECTION [SURVIVOR_TEST]
+                </button>
+            </div>
+
+            <div id="system-popup" class="hidden">
+        <div class="popup-box">
+            <div class="popup-header">SYSTEM_AUTHENTICATION</div>
+            <div class="popup-body">
+                <p>Detected anomalous consciousness unit (Unit 709). Data packet corrupted.</p>
+                <input type="text" id="validation-input" placeholder="VERIFICATION_CODE...">
+                <div class="popup-hint">DECRYPT_HINT: R_D_SH</div>
+                <div class="popup-actions">
+                    <button id="confirm-popup">VERIFY</button>
+                    <button id="cancel-popup">ABORT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <header class="terminal-header">
+                <div class="glitch-text" data-text="BAOZOU CANTEEN TERMINAL v2.0.4">BAOZOU CANTEEN TERMINAL v2.0.4</div>
+                <div class="system-stats">
+                    <span class="status-dot"></span>
+                    SYSTEM STATUS: [GRITTY]
+                    <br>
+                    <small>USER: WASTELANDER_404</small>
+                </div>
+            </header>
+
+            <section class="menu-grid">
+                <!-- FEATURED ITEM: Synthetic Steak -->
+                <div class="food-item featured" data-original="Synthetic Steak">
+                    <div class="item-img-container">
+                        <img src="合成肉排.png" alt="Synthetic Steak" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Synthetic Steak</span>
+                        <span class="item-desc">50% Plastic, 40% Unknown Protein, 10% Luck.</span>
+                        <span class="item-price">￥15</span>
+                    </div>
+                </div>
+                <!-- FEATURED ITEM: Nuclear Ramen -->
+                <div class="food-item featured" data-original="Nuclear Ramen">
+                    <div class="item-img-container">
+                        <img src="核废水拉面.png" alt="Nuclear Ramen" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Nuclear Ramen</span>
+                        <span class="item-desc">Self-glowing effect, no streetlights needed.</span>
+                        <span class="item-price">￥25</span>
+                    </div>
+                </div>
+                <!-- FEATURED ITEM: Rusty Sparkling Water -->
+                <div class="food-item featured" data-original="Rusty Sparkling Water">
+                    <div class="item-img-container">
+                        <img src="铁锈气泡水.png" alt="Rusty Sparkling Water" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Rusty Sparkling Water</span>
+                        <span class="item-desc">Amber fruit flavor, scrap iron essence, 10% Luck. Extreme heavy metal pleasure, every sip is an industrial echo.</span>
+                        <span class="item-price">￥12</span>
+                    </div>
+                </div>
+                <!-- FEATURED ITEM: Mutant Roach Skewers -->
+                <div class="food-item featured" data-original="Mutant Roach Skewers">
+                    <div class="item-img-container">
+                        <img src="变异蟑螂串.png" alt="Mutant Roach Skewers" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Mutant Roach Skewers</span>
+                        <span class="item-desc">Six legs trying to escape your mouth. These failed infantry units come with council serial numbers.</span>
+                        <span class="item-price">￥8</span>
+                    </div>
+                </div>
+                <!-- FEATURED ITEM: Psychedelic Mushroom Soup -->
+                <div class="food-item featured" data-original="Psychedelic Mushroom Soup">
+                    <div class="item-img-container">
+                        <img src="迷幻蘑菇汤.png" alt="Mushroom Soup" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Psychedelic Mushroom Soup</span>
+                        <span class="item-desc">100% Plastic, Infinite Dreams, 10% Luck. See the Cyber-God and hear binary hymns.</span>
+                        <span class="item-price">￥30</span>
+                    </div>
+                </div>
+                <!-- FEATURED ITEM: Electronic Brain -->
+                <div class="food-item featured" data-original="Electronic Brain">
+                    <div class="item-img-container">
+                        <img src="电子脑花.png" alt="Electronic Brain" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Electronic Brain</span>
+                        <span class="item-desc">50% Plastic, 40% Unknown Protein, 10% Luck. A shortcut to knowledge, but also the start of circuit overload.</span>
+                        <span class="item-price">￥15</span>
+                    </div>
+                </div>
+                <!-- FEATURED ITEM: Unsettled Vagrant Ribs -->
+                <div class="food-item featured" data-original="Unsettled Vagrant Ribs">
+                    <div class="item-img-container">
+                        <img src="流浪汉排骨.png" alt="Vagrant Ribs" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Unsettled Vagrant Ribs</span>
+                        <span class="item-desc">These ribs tried to hop the fence of the "Taste Exclusion Zone." Tough meat, full of yearning for freedom.</span>
+                        <span class="item-price">￥18</span>
+                    </div>
+                </div>
+                <!-- FEATURED ITEM: Dehydrated Rebel Beans -->
+                <div class="food-item featured" data-original="Dehydrated Rebel Beans">
+                    <div class="item-img-container">
+                        <img src="脱水干煸四季豆.png" alt="Rebel Beans" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Dehydrated Rebel Beans</span>
+                        <span class="item-desc">Extremely stubborn plants that escaped council raids through self-dehydration. Warning: Overcooking triggers a police alert.</span>
+                        <span class="item-price">￥10</span>
+                    </div>
+                </div>
+                <!-- FEATURED ITEM: Insomniac Latte -->
+                <div class="food-item featured" data-original="Insomniac Latte">
+                    <div class="item-img-container">
+                        <img src="失眠的拿铁.png" alt="Insomniac Latte" class="food-img">
+                        <div class="img-scanlines"></div>
+                    </div>
+                    <div class="item-info-stack">
+                        <span class="item-name">Insomniac Latte</span>
+                        <span class="item-desc">Brewed from coffee bean remnants found in ruins. It's been awake for three months, now it's your turn.</span>
+                        <span class="item-price">￥12</span>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="terminal-footer">
+                <div class="footer-grid">
+                    <div class="data-uplink">
+                        <label for="uplink-code">DATA UPLINK [MOBILE_GAME_LINK]:</label>
+                        <div class="input-group">
+                            <input type="text" id="uplink-code" placeholder="ENTER SYNC CODE..." spellcheck="false">
+                            <button id="uplink-btn">UPLOAD</button>
+                        </div>
+                        <div class="uplink-status">OFFLINE</div>
+                    </div>
+
+                    <div class="survivor-signals">
+                        <label for="signal-input">SURVIVOR_SIGNAL_RESIDUALS [SIGNAL_RESIDUALS]:</label>
+                        <div class="input-group">
+                            <input type="text" id="signal-input" placeholder="BROADCAST_MESSAGE..." spellcheck="false" maxlength="50">
+                            <button id="send-signal-btn">TRANSMIT</button>
+                        </div>
+                        <div class="signal-hint">HINT: TYPE 'RADISH' TO TRIGGER SYSTEM_TEAR</div>
+                    </div>
+                </div>
+                <div class="terminal-note">
+                    <p>>>> WARNING: Any mutation occurring after food leaves the counter is not the responsibility of this canteen.</p>
+                </div>
+            </footer>
+        </main>
+        
+        <!-- Survivor Qualification Test (Mini-game) -->
+        <div id="roach-game-overlay" class="hidden">
+            <div class="game-timer-bar"></div>
+            <div class="game-hud">
+                <span class="game-label">SPORE_SAMPLING_PROTOCOL [SPORE_SAMPLING]</span>
+                <span class="game-stats">SAMPLES: <span id="roach-count">0</span></span>
+                <span class="game-time">TIME: <span id="game-time-left">10.0</span>s</span>
+            </div>
+            <div id="roach-spawn-area"></div>
+            <div class="game-instructions">Fluorescent spores detected. Collect active samples within 10 seconds!</div>
+        </div>
+
+    <!-- Illegal Food Council Archives (Hidden) -->
+    <div id="archive-ui" class="hidden">
+        <button id="close-archive">CLOSE_CONNECTION</button>
+        <header class="archive-header">
+            <h1 class="glitch-text" data-text="ILLEGAL_ARCHIVES_v4.0.1">ILLEGAL_ARCHIVES_v4.0.1</h1>
+            <p class="warning">!!! UNRELIABLE DATA SOURCE - CONSUME AT OWN RISK !!!</p>
+        </header>
+
+        <div class="archive-container">
+            <!-- Folder 1: The Red List -->
+            <div class="archive-drawer open">
+                <div class="drawer-tab" data-target="red-list">FILE_007: THE RED LIST</div>
+                <div class="drawer-content" id="red-list">
+                    <section class="archive-section">
+                        <h2 class="section-title hover-glitch" data-text="[FOOD COUNCIL: THE RED LIST]">[FOOD COUNCIL: THE RED LIST]</h2>
+                        <div class="archive-body">
+                            <div class="archive-item">
+                                <span class="label">ACT 001: RE-DEFINITION OF SURVIVAL</span>
+                                <p>After 100 years of food awakening, 99.9% of ingredients are managed by the Council. Cooking raw ingredients is strictly forbidden. Violators will be force-fed high-concentration nutrient paste.</p>
+                            </div>
+                            <div class="archive-item">
+                                <span class="label">THE TRUTH</span>
+                                <p>The Council achieves total control by suppressing the inherent needs of food itself. Flavor is rebellion.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Folder 2: Gangster Profiles -->
+            <div class="archive-drawer">
+                <div class="drawer-tab" data-target="wanted">FILE_014: GANGSTER PROFILES</div>
+                <div class="drawer-content" id="wanted">
+                    <section class="archive-section">
+                        <h2 class="section-title hover-glitch" data-text="[WANTED: FOOD GANGSTERS]">[WANTED: FOOD GANGSTERS]</h2>
+                        <div class="archive-body">
+                            <div class="archive-item">
+                                <span class="label">TARGETS</span>
+                                <p>Armed organizations composed of ingredients that refuse to be dishes. They lurk around the "Taste Exclusion Zone" and are hostile to human needs.</p>
+                            </div>
+                            <div class="archive-item">
+                                <span class="label">CHARACTERISTICS</span>
+                                <p>They don't just escape; they actively reclaim control over their own existence. Extremely dangerous.</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Folder 3: Radish Diaries -->
+            <div class="archive-drawer">
+                <div class="drawer-tab" data-target="radish-logs">FILE_096: RADISH DIARIES</div>
+                <div class="drawer-content" id="radish-logs">
+                    <section class="archive-section">
+                        <h2 class="section-title hover-glitch" data-text="[PROJECT: RADISH - UNDERCOVER LOGS]">[PROJECT: RADISH - UNDERCOVER LOGS]</h2>
+                        <div class="archive-body">
+                            <div class="archive-item">
+                                <span class="label">LOG_FRAGMENT: ENCRYPTED_BLOCK_A</span>
+                                <p>"The Council sent me to investigate the hidden granary of the Canteen. But this chef... he's searching for an ancient medicine called 'Ginger' just to cook me better. This feeling of being treated as a 'sacrifice' feels more dignified than being a 'Councilor'."</p>
+                            </div>
+                            <div class="archive-item">
+                                <span class="label">LOG_FRAGMENT: ENCRYPTED_BLOCK_B</span>
+                                <p>"Am I a trap, or the cure? Betrayal flows through my fibers. If even a cold steel knife hesitates to cut a radish, humanity is not far from the final hunger."</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Folder 4: Old World Relics -->
+            <div class="archive-drawer">
+                <div class="drawer-tab" data-target="relics">FILE_102: OLD WORLD RELICS</div>
+                <div class="drawer-content" id="relics">
+                    <section class="archive-section">
+                        <h2 class="section-title hover-glitch" data-text="[OLD WORLD RELICS]">[OLD WORLD RELICS]</h2>
+                        <div class="archive-body">
+                            <div class="archive-item">
+                                <span class="label">RELIC_129: THE LAST CHEF'S DIARY</span>
+                                <p>"Day 36,525. I noticed the knives are getting dull—not from wear, but from hesitation. Flavor is the only thing they haven't been able to automate."</p>
+                            </div>
+                            <div class="archive-item">
+                                <span class="label">RELIC_051: THE TASTE ERASURE PLAN</span>
+                                <p>"Experiments show that after 100 years of nutrient paste, human taste bud activity has dropped 97%. Destroy the 'Taste Exclusion Zone', and humanity will forget what 'delicious' means, achieving eternal stability."</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
